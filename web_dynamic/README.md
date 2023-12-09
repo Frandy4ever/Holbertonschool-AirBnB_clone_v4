@@ -1,0 +1,1 @@
+![Static or Dynamic Web](staticORdynamic.jpg)
