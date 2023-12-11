@@ -25,16 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   fetch(`$(url):5001/api/v1/status/`)
-	.then(response => response.json())
-	.then(data => {
-		const apiStatusDiv = document.querySelector('div#api_status');
-		if (data.status == 'OK') {
-			apiStatusDiv.classList.add('available');
-		} else {
-			apiStatusDiv.classList.remove('available');
-		}
-	})
-	.catch(error => {
-		console.error('Error fectching API status:', error);
-	});
+    .then(response => response.json())
+    .then(data => {
+      const apiStatusDiv = document.querySelector('div#api_status');
+    if (data.status == 'OK') {
+      apiStatusDiv.classList.add('available');
+    } else {
+      apiStatusDiv.classList.remove('available');
+    }
+  })
+  .catch(error => {
+    console.error('Error fectching API status:', error);
+  });
 });
