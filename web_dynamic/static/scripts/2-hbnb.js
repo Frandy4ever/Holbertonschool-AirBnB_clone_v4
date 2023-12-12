@@ -20,9 +20,6 @@ $(document).ready(() => {
 
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
-});
-
-
   $.ajax({
     url: `${url}:5001/api/v1/status/`,
     method: 'GET',
