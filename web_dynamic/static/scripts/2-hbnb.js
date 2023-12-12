@@ -1,28 +1,27 @@
 #!/usr/bin/node
-$(function () {
+$(document).ready(() => {
   const url = `http://${window.location.hostname}`;
-  const amenity = {};
 
   // Uncheck all checkboxes when the page loads
   $('input:checkbox:checked').prop('checked', false);
 
-  $('li input:checkbox').on('change', function () {
-    const amenityId = $(this).data('id');
-    const amenityName = $(this).data('name');
+  $('li input:checkbox').on('change', () => {
+    const checkedCheckboxes = $('li input:checkbox:checked');
 
-    if ($(this).is(':checked')) {
-      const newAmenity = { ...amenity };
-      newAmenity[amenityId] = amenityName;
-      Object.assign(amenity, newAmenity);
-    } else {
-      const newAmenity = { ...amenity };
-      delete newAmenity[amenityId];
-      Object.assign(amenity, newAmenity);
-    }
-    console.log(amenity);
-    $('.amenities h4').text(Object.values(amenity).join(', '));
+    const amenityDict = checkedCheckboxes.reduce((obj, checkbox) => {
+      const amenityId = $(checkbox).data('id');
+      const amenityName = $(checkbox).data('name');
+      return { ...obj, [amenityId]: amenityName };
+    }, {});
+
+    const amenityArray = Object.values(amenityDict);
+
+    $('.amenities h4').text(amenityArray.join(', '));
+
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
+});
+
 
   $.ajax({
     url: `${url}:5001/api/v1/status/`,
