@@ -4,15 +4,16 @@ $(function () {
   $('input:checkbox:checked').prop('checked', false);
 
   $('li input:checkbox').change(function () {
+    const amenId = $(this).data('id');
+    const amenName = $(this).data('name');
+  
     if ($(this).is(':checked')) {
-      const newAmens = { ...amens };
-      newAmens[$(this).data('id')] = $(this).data('name');
-      Object.assign(amens, newAmens);
+      amens[amenId] = amenName;
     } else {
-      const newAmens = { ...amens };
-      delete newAmens[$(this).data('id')];
-      Object.assign(amens, newAmens);
+      delete amens[amenId];
     }
+  
     $('.amenities h4').text(Object.values(amens).join(', '));
   });
+  
 });
